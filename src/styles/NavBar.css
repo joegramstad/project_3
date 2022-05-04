@@ -1,0 +1,16 @@
+.headerBox {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+}
+
+.navBar {
+    display: flex;
+    justify-content: space-evenly;
+    top: 0;
+    background-color: silver;
+    padding-bottom: 5px;
+}

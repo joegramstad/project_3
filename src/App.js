@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+
+import Axios from 'axios';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+  const [entries, setEntries] = useState([]);
+
+  function getEntries() {
+    Axios.get('/api/entries')
+        .then(function (response) {
+          setEntries(response.data);
+        })
+  }
+
+  useEffect(getEntries, []);
+
+  const entryList = [];
+  for (let entry of entries) {
+    entryList.push(<div>
+      <a href={'/entry/' + entry._id}><h1>{entry.title}</h1></a>
+      <span> Director: {entry.director}</span>
+      <span> Release Year: {entry.releaseYear}</span>
+    </div>)
+
+  }
+
+  return (<div> {entryList} </div>)
+
 }
 
 export default App;
