@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const auth_middleware = require('./middleware/auth_middleware');
 const router = express.Router();
 
-router.post('/authenticate', function(request, response) {
+router.post('/authenticate', auth_middleware, function(request, response) {
     const {username, password} = request.body;
 
     return UserModel.getUserByUserName(username)
@@ -54,27 +54,36 @@ router.get('/:username', function(request, response) {
 })
 
 router.post('/', function(request, response) {
-    // const userUsername = request.body.username;
-    // const userPassword = request.body.password;
-    // console.log(userPassword);
-    // if (!userUsername || !userPassword) {
-    //     response.status(401).send("Missing username or password argument")
-    // }
-    //
-    // const user = {
-    //     username: userUsername,
-    //     password: userPassword
-    // }
+    const userUsername = request.body.username;
+    const userPassword = request.body.password;
+    console.log(userPassword);
+    if (!userUsername || !userPassword) {
+        response.status(401).send("Missing username or password argument")
+    }
 
-    return UserModel.createUser(request.body)
-        .then(success => {
-            response.send(200).send(success);
+    const user = {
+        username: userUsername,
+        password: userPassword
+    }
+    return UserModel.createUser(user)
+        .then(dbResponse => {
+
+            if (dbResponse.password === userPassword) {
+                const payload = {
+                    username: userUsername,
+                };
+                const token = jwt.sign(payload, "SUPER_SECRET", {
+                    expiresIn: '14d'
+                });
+                return response.cookie('token', token, {httpOnly: true})
+                    .status(200).send({userUsername});
+            }
+
+            return response.status(401).send("Invalid password");
         })
         .catch(error => {
-            response.status(500).send(error)
+            response.status(400).send(error)
         })
-
-
 
 });
 

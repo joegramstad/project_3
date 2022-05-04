@@ -14,8 +14,8 @@ ReactDOM.render(
             <Routes>
                 <Route path={"/"} element={<App />}/>
                 <Route path={"/login"} element={<Login />} />
-                <Route path={"/entry"} element={<EntryCreate />}/>
-                <Route path={"/entry/:entryID"} element={<EntryThread />} />
+                {/*<Route path={"/entry"} element={<EntryCreate />}/>*/}
+                {/*<Route path={"/entry/:entryID"} element={<EntryThread />} />*/}
             </Routes>
         </BrowserRouter>
 

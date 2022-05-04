@@ -12,7 +12,7 @@ export default function Login(props) {
     function createNewUser() {
         console.log(username)
         console.log(password)
-        Axios.post('/api/user', {username, password})
+        Axios.post('api/user/', {username, password})
             .then(response => {
                 navigate('/')
             })

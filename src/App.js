@@ -7,7 +7,7 @@ function App() {
   const [entries, setEntries] = useState([]);
 
   function getEntries() {
-    Axios.get('/api/entries')
+    Axios.get('api/entries/')
         .then(function (response) {
           setEntries(response.data);
         })
@@ -18,7 +18,7 @@ function App() {
   const entryList = [];
   for (let entry of entries) {
     entryList.push(<div>
-      <a href={'/entry/' + entry._id}><h1>{entry.title}</h1></a>
+      <a href={'entries/' + entry._id}><h1>{entry.title}</h1></a>
       <span> Director: {entry.director}</span>
       <span> Release Year: {entry.releaseYear}</span>
     </div>)

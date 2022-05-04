@@ -11,6 +11,7 @@ const userRouter = require('./routes/user');
 
 const mongooseEndpoint = 'mongodb+srv://gramstad:1991JGoe@project3.eqx1g.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
+
 mongoose.connect(mongooseEndpoint, { useNewUrlParser: true });
 
 const db = mongoose.connection;
