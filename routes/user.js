@@ -36,7 +36,7 @@ router.post('/logout', function(request, response) {
         .status(200).send();
 })
 
-router.get('/isLoggedIn', function(request, response) {
+router.get('/isLoggedIn', auth_middleware, function(request, response) {
     return response.status(200).send({username: request.username});
 })
 

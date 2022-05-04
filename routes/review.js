@@ -10,8 +10,8 @@ const entries = [
     {title: "The Godfather"},
 ];
 
-route.get('/', function(request, response) {
-    const id = request.body.id;
+route.get('/:id', function(request, response) {
+    const id = request.params.id
 
     return ReviewModel.getReviewByEntryId(id)
         .then(dbResponse => {

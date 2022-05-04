@@ -11,6 +11,7 @@ export default function NavBar(props) {
     const navigate = useNavigate();
 
     useEffect(function() {
+        console.log("checking login")
         Axios.get('/api/user/isLoggedIn')
             .then(response => setUsername(response.data.username))
             .catch(error => console.log("User is not logged in"));
@@ -24,7 +25,7 @@ export default function NavBar(props) {
             .catch(error => console.log("Error logging out"));
     }
 
-    if (username) {
+    if (username != null) {
         return (
             <div>
                 <div className='headerBox'>
@@ -33,16 +34,13 @@ export default function NavBar(props) {
                 <div className='navBar'>
                     <Link to={'/'}>Home</Link>
                     <Link to={'/entry'}>Create Entry</Link>
-                    <h1>
-                        {username} is logged in
-                        <button onClick={logout}>Logout</button>
-                    </h1>
+                    <div> {username} </div>
+                    <button onClick={logout}>Logout</button>
                 </div>
             </div>
         )
     }
 
-    // return (<a href='/login'><h1>Click here to login</h1></a>)
     return (
         <div>
             <div className='headerBox'>

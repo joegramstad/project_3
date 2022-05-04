@@ -8,8 +8,8 @@ function createReview(review) {
     return ReviewModel.create(review);
 }
 
-function getReviewByEntryId(id) {
-    return ReviewModel.findById(id).exec();
+function getReviewByEntryId(entryID) {
+    return ReviewModel.findById(entryID).exec();
 }
 
 function deleteReview(id) {

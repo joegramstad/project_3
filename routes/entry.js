@@ -3,13 +3,6 @@ const auth_middleware = require('./middleware/auth_middleware');
 const EntryModel = require('./model/entry.model');
 const route = express.Router();
 
-const entries = [
-    {title: "The Hateful Eight", time: 100, director: "Quentin Tarantino", year: 2015},
-    {title: "Star Wars", time: 100, director: "George Lucas", year: 1977},
-    {title: "The Godfather", time: 100, director: "Francis Ford Coppola", year: 1972},
-];
-
-
 route.get('/', function(request, response) {
 
     return EntryModel.getAllEntries()
