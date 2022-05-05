@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import {useNavigate, useParams} from 'react-router';
+import './styles/EntryThread.css';
 
 
 export default function EntryThread(props) {
@@ -62,15 +63,15 @@ export default function EntryThread(props) {
         for (let review of reviews) {
             if (username === review.creator) {
                 reviewList.push(<div>
-                    <h1>{review.creator}</h1>
-                    <div> Review: {review.text}</div>
-                    <button onClick={() => editReview(review._id)}> Edit </button>
-                    <button onClick={() => deleteReview(review._id)}> Delete </button>
+                    <h4>Reviewer: {review.creator}</h4>
+                    <div className={'review'}> {review.text} </div>
+                    <button className={'changeButton'} onClick={() => editReview(review._id)}> Edit </button>
+                    <button className={'changeButton'} onClick={() => deleteReview(review._id)}> Delete </button>
                 </div>)
             } else {
                 reviewList.push(<div>
-                    <h1>{review.creator}</h1>
-                    <div> Review: {review.text}</div>
+                    <h4> Reviewer: {review.creator}</h4>
+                    <div className={'review'}> {review.text} </div>
                 </div>)
             }
 
@@ -78,9 +79,6 @@ export default function EntryThread(props) {
     }
 
     function createReview() {
-        console.log(text)
-        console.log(params.entryID)
-        console.log(username)
         Axios.post('/api/reviews/', {text: text, entry: entryID, username: username})
             .then(response => {
                 navigate('/entry/' + entryID)
@@ -91,20 +89,19 @@ export default function EntryThread(props) {
     if (username.length > 0) {
         return (
             <div>
+                <div className={'titleBox'}>
                 <h1>
-                    Title: {title}
+                    {title}
                 </h1>
-                <h2>
+                <h3>
                     Director: {director}
-                </h2>
-                <h2>
+                </h3>
+                <h3>
                     Year: {releaseYear}
-                </h2>
-                <div> {reviewList} </div>
-                <div>
-                    <h5>
-                        Review Text
-                    </h5>
+                </h3>
+                </div>
+                <div id={'threadContainer'}> {reviewList} </div>
+                <div className={'postReview'}>
                     <input value={text} onChange={e => setText(e.target.value)} />
                     <button onClick={createReview}>
                         Post Review
@@ -116,16 +113,18 @@ export default function EntryThread(props) {
 
     return (
         <div>
-            <h1>
-                Title: {title}
-            </h1>
-            <h2>
-                Director: {director}
-            </h2>
-            <h2>
-                Year: {releaseYear}
-            </h2>
-            <div> {reviewList} </div>
+            <div className={'titleBox'}>
+                <h1>
+                    {title}
+                </h1>
+                <h3>
+                    Director: {director}
+                </h3>
+                <h3>
+                    Year: {releaseYear}
+                </h3>
+            </div>
+            <div id={'threadContainer'}> {reviewList} </div>
         </div>
     )
 

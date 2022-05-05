@@ -1,0 +1,26 @@
+#threadContainer {
+    display: grid;
+    grid-gap: 15px;
+    margin-bottom: 50px;
+    justify-content: center;
+    outline: 5px solid grey;
+    outline-offset: 5px;
+    margin-left: 40%;
+    margin-right: 40%;
+}
+
+.titleBox {
+    text-align: center;
+}
+
+.changeButton {
+    margin-right: 10px;
+}
+
+.postReview {
+    text-align: center;
+}
+
+.review {
+    margin-bottom: 10px;
+}

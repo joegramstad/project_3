@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react';
 import Axios from 'axios';
+import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router';
+import './styles/EntryCreate.css';
 
 export default function EntryEdit(props) {
     const params = useParams();
@@ -32,7 +33,8 @@ export default function EntryEdit(props) {
 
     return (
         <div>
-            <h1>Create Movie Entry</h1>
+            <h1 id={'pageTitle'}>Edit Movie Entry</h1>
+            <div className={'createBox'}>
             <h5>
                 Movie Title
             </h5>
@@ -49,6 +51,7 @@ export default function EntryEdit(props) {
             <button onClick={editEntry}>
                 Edit Movie Entry
             </button>
+            </div>
         </div>
 
     )
