@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-
 import Axios from 'axios';
 import {useNavigate} from "react-router";
+import './styles/App.css';
 
 function App() {
 
@@ -17,10 +17,6 @@ function App() {
 
     function editEntry(id) {
             navigate('/entry/edit/' + id);
-        // Axios.put('api/entries/')
-        //     .then(response=> {
-        //     console.log(response.data);
-        //     })
     }
 
     function deleteEntry(id) {
@@ -40,16 +36,21 @@ function App() {
     const entryList = [];
     for (let entry of entries) {
         entryList.push(<div>
-        <a href={'entry/' + entry._id}><h1>{entry.title}</h1></a>
-        <span> Director: {entry.director}</span>
-        <span> Release Year: {entry.releaseYear}</span>
-        <button onClick={() => editEntry(entry._id)}> Edit </button>
-        <button onClick={() => deleteEntry(entry._id)}> Delete </button>
+        <a href={'entry/' + entry._id}><h3>{entry.title}</h3></a>
+            <div className={'info'}> <b>Director:</b> {entry.director}</div>
+        <div className={'info'}> <b>Release Year:</b> {entry.releaseYear}</div>
+        <button className={'changeButton'} onClick={() => editEntry(entry._id)}> Edit </button>
+        <button className={'changeButton'} onClick={() => deleteEntry(entry._id)}> Delete </button>
         </div>)
 
     }
 
-    return (<div> {entryList} </div>)
+    return (
+        <div>
+            <h1 id={'pageTitle'}> Movie Entries </h1>
+            <div id={'entryContainer'}> {entryList} </div>
+        </div>
+    )
 
 }
 

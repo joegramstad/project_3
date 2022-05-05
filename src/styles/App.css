@@ -1,0 +1,22 @@
+#entryContainer {
+    display: grid;
+    grid-gap: 15px;
+    margin-bottom: 50px;
+    justify-content: center;
+    outline: 5px solid grey;
+    outline-offset: 10px;
+    margin-left: 40%;
+    margin-right: 40%;
+}
+
+.info {
+    margin-bottom: 20px;
+}
+
+.changeButton {
+    margin-right: 10px;
+}
+
+#pageTitle {
+    text-align: center;
+}
