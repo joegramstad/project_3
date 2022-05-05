@@ -4,12 +4,6 @@ const ReviewModel = require('./model/review.model');
 
 const route = express.Router();
 
-const entries = [
-    {text: "The Hateful Eight"},
-    {title: "Star Wars"},
-    {title: "The Godfather"},
-];
-
 route.get('/:id', function(request, response) {
     const id = request.params.id
 
@@ -37,7 +31,11 @@ route.delete('/', auth_middleware, function(request, response) {
 route.post('/', auth_middleware, function(request, response) {
     const reviewText = request.body.text;
     const entry = request.body.entry;
-    const username = request.username;
+    const username = request.body.username;
+
+    console.log(request.body.text)
+    console.log(request.body.entry)
+    console.log(request.body.username)
 
     if (!reviewText) {
         response.status(401).send("No Text Provided")
