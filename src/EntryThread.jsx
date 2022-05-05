@@ -15,8 +15,6 @@ export default function EntryThread(props) {
     const [reviews, setReviews] = useState([]);
     const [text, setText] = useState('');
 
-
-
     useEffect(() => {
         Axios.get('/api/entries/' + params.entryID)
             .then(function(response) {
@@ -43,6 +41,22 @@ export default function EntryThread(props) {
     useEffect(getUser);
     useEffect(getReviews, []);
 
+    function editReview(reviewID) {
+        Axios.put('/api/reviews/' + reviewID, {text: text, entry: entryID, username: username})
+            .then(response => {
+                navigate('/entry/' + entryID)
+            })
+            .catch(error => console.log(error));
+    }
+
+    function deleteReview(reviewID) {
+        Axios.delete('/api/reviews/' + reviewID)
+            .then(response => {
+                navigate('/entry/' + entryID)
+            })
+            .catch(error => console.log(error));
+    }
+
     const reviewList = [];
     if (reviews.length > 0) {
         for (let review of reviews) {
@@ -50,8 +64,8 @@ export default function EntryThread(props) {
                 reviewList.push(<div>
                     <h1>{review.creator}</h1>
                     <div> Review: {review.text}</div>
-                    {/*<button onClick={}> Edit </button>*/}
-                    {/*<button onClick={}> Delete </button>*/}
+                    <button onClick={() => editReview(review._id)}> Edit </button>
+                    <button onClick={() => deleteReview(review._id)}> Delete </button>
                 </div>)
             } else {
                 reviewList.push(<div>
@@ -63,8 +77,6 @@ export default function EntryThread(props) {
         }
     }
 
-    // <a href={'entry/' + entry._id}><h1>{entry.title}</h1></a>
-
     function createReview() {
         console.log(text)
         console.log(params.entryID)
@@ -75,8 +87,6 @@ export default function EntryThread(props) {
             })
             .catch(error => console.log(error));
     }
-
-
 
     if (username.length > 0) {
         return (

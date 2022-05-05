@@ -18,8 +18,15 @@ function deleteReview(id) {
     }).exec();
 }
 
+function changeReview(id, review) {
+    return ReviewModel.updateOne(
+        {_id: id},
+        {text: review.text, entryID: review.entryID}).exec();
+}
+
 module.exports = {
     createReview,
     deleteReview,
     getReviewByEntryId,
+    changeReview
 }
