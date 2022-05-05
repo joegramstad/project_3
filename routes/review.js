@@ -17,7 +17,7 @@ route.get('/:id', function(request, response) {
 })
 
 route.put('/:id', function(request, response) {
-    const id = request.params.id
+    const id = request.params.id;
     const reviewText = request.body.text;
     const entry = request.body.entry;
 
@@ -27,6 +27,18 @@ route.put('/:id', function(request, response) {
     }
 
     return ReviewModel.changeReview(id, review)
+        .then(dbResponse => {
+            response.status(200).send(dbResponse)
+        })
+        .catch(error => {
+            response.status(400).send(error)
+        })
+})
+
+route.delete('/', auth_middleware, function(request, response) {
+    const id = request.body.id;
+
+    return ReviewModel.deleteReviewsByEntryId(id)
         .then(dbResponse => {
             response.status(200).send(dbResponse)
         })

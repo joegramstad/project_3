@@ -6,6 +6,7 @@ import EntryCreate from './EntryCreate';
 import Login from './Login';
 import EntryThread from './EntryThread';
 import NavBar from './NavBar';
+import EntryEdit from "./EntryEdit";
 
 ReactDOM.render(
     <div>
@@ -15,6 +16,7 @@ ReactDOM.render(
                 <Route path={"/"} element={<App />}/>
                 <Route path={"/login"} element={<Login />} />
                 <Route path={"/entry"} element={<EntryCreate />}/>
+                <Route path={"/entry/edit/:entryID"} element={<EntryEdit />}/>
                 <Route path={"/entry/:entryID"} element={<EntryThread />} />
             </Routes>
         </BrowserRouter>

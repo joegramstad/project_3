@@ -53,10 +53,32 @@ route.post('/', auth_middleware, function(request, response) {
         })
 })
 
-route.delete('/', auth_middleware, function(request, response) {
-    const id = request.body.id;
+route.delete('/:id', auth_middleware, function(request, response) {
+    const id = request.params.id;
 
     return EntryModel.deleteEntry(id)
+        .then(dbResponse => {
+            response.status(200).send(dbResponse)
+        })
+        .catch(error => {
+            response.status(400).send(error)
+        })
+})
+
+route.put('/:id', auth_middleware, function(request, response) {
+    const id = request.params.id;
+
+    const title = request.body.title;
+    const director = request.body.director;
+    const releaseYear = request.body.year;
+
+    const entry = {
+        title: title,
+        director: director,
+        releaseYear: releaseYear
+    }
+
+    return EntryModel.changeEntry(id, entry)
         .then(dbResponse => {
             response.status(200).send(dbResponse)
         })

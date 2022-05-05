@@ -12,6 +12,10 @@ function getReviewByEntryId(id) {
     return ReviewModel.find({entryID: id}).exec();
 }
 
+function deleteReviewsByEntryId(id) {
+    return ReviewModel.remove({entryID: id}).exec();
+}
+
 function deleteReview(id) {
     return ReviewModel.deleteOne({
         _id: id
@@ -28,5 +32,6 @@ module.exports = {
     createReview,
     deleteReview,
     getReviewByEntryId,
-    changeReview
+    changeReview,
+    deleteReviewsByEntryId
 }
