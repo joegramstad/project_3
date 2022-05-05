@@ -1,0 +1,11 @@
+#createBox {
+    margin-bottom: 50px;
+    outline: 5px solid grey;
+    outline-offset: 10px;
+    margin-left: 40%;
+    margin-right: 40%;
+}
+
+#pageTitle {
+    text-align: center;
+}

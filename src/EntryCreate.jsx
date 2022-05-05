@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import Axios from 'axios';
 import { useNavigate } from 'react-router';
+import './styles/EntryCreate.css';
 
 export default function EntryCreate(props) {
-
 
     const navigate = useNavigate();
     const [title, setTitle] = useState('');
@@ -23,7 +23,8 @@ export default function EntryCreate(props) {
 
     return (
         <div>
-            <h1>Create Movie Entry</h1>
+            <h1 id={'pageTitle'}>Create Movie Entry</h1>
+            <div id={'createBox'}>
             <h5>
                 Movie Title
             </h5>
@@ -40,6 +41,7 @@ export default function EntryCreate(props) {
             <button onClick={createEntry}>
                 Create Movie Entry
             </button>
+            </div>
         </div>
 
     )
