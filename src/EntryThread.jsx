@@ -66,6 +66,9 @@ export default function EntryThread(props) {
     // <a href={'entry/' + entry._id}><h1>{entry.title}</h1></a>
 
     function createReview() {
+        console.log(text)
+        console.log(params.entryID)
+        console.log(username)
         Axios.post('/api/reviews/', {text: text, entry: entryID, username: username})
             .then(response => {
                 navigate('/entry/' + entryID)

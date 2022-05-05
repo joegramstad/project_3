@@ -2,7 +2,7 @@ const Schema = require('mongoose').Schema;
 
 const ReviewSchema = new Schema({
     text: String,
-    entryID: Number,
+    entryID: String,
     creator: String,
     commentDate: {
         type: Date,

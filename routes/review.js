@@ -43,7 +43,7 @@ route.post('/', auth_middleware, function(request, response) {
 
     const review = {
         text: reviewText,
-        entry: entry,
+        entryID: entry,
         creator: username
     }
 

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const ReviewSchema = require('../schema/entry.schema');
+const ReviewSchema = require('../schema/review.schema');
 
 const ReviewModel = mongoose.model("Review", ReviewSchema);
 
