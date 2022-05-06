@@ -45,6 +45,7 @@ export default function EntryThread(props) {
     function editReview(reviewID) {
         Axios.put('/api/reviews/' + reviewID, {text: text, entry: entryID, username: username})
             .then(response => {
+                window.location.reload()
                 navigate('/entry/' + entryID)
             })
             .catch(error => console.log(error));
@@ -53,6 +54,7 @@ export default function EntryThread(props) {
     function deleteReview(reviewID) {
         Axios.delete('/api/reviews/' + reviewID)
             .then(response => {
+                window.location.reload()
                 navigate('/entry/' + entryID)
             })
             .catch(error => console.log(error));
@@ -81,6 +83,7 @@ export default function EntryThread(props) {
     function createReview() {
         Axios.post('/api/reviews/', {text: text, entry: entryID, username: username})
             .then(response => {
+                window.location.reload()
                 navigate('/entry/' + entryID)
             })
             .catch(error => console.log(error));

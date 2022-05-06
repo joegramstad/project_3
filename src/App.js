@@ -7,6 +7,16 @@ function App() {
 
     const navigate = useNavigate();
     const [entries, setEntries] = useState([]);
+    const [username, setUsername] = useState('');
+
+    function getUser() {
+        Axios.get('/api/user/isLoggedIn')
+            .then(function (response) {
+                setUsername(response.data.username);
+            })
+    }
+
+    useEffect(getUser, []);
 
     function getEntries() {
         Axios.get('api/entries/')
@@ -27,6 +37,7 @@ function App() {
 
         Axios.delete('api/reviews/', {data: {id: id}})
             .then(response => {
+                window.location.reload()
                 console.log(response.data);
             })
     }
@@ -35,13 +46,21 @@ function App() {
 
     const entryList = [];
     for (let entry of entries) {
-        entryList.push(<div>
-        <a href={'entry/' + entry._id}><h3>{entry.title}</h3></a>
-            <div className={'info'}> <b>Director:</b> {entry.director}</div>
-        <div className={'info'}> <b>Release Year:</b> {entry.releaseYear}</div>
-        <button className={'changeButton'} onClick={() => editEntry(entry._id)}> Edit </button>
-        <button className={'changeButton'} onClick={() => deleteEntry(entry._id)}> Delete </button>
-        </div>)
+        if (username === entry.creator) {
+            entryList.push(<div>
+                <a href={'entry/' + entry._id}><h3>{entry.title}</h3></a>
+                <div className={'info'}><b>Director:</b> {entry.director}</div>
+                <div className={'info'}><b>Release Year:</b> {entry.releaseYear}</div>
+                <button className={'changeButton'} onClick={() => editEntry(entry._id)}> Edit</button>
+                <button className={'changeButton'} onClick={() => deleteEntry(entry._id)}> Delete</button>
+            </div>)
+        } else {
+            entryList.push(<div>
+                <a href={'entry/' + entry._id}><h3>{entry.title}</h3></a>
+                <div className={'info'}><b>Director:</b> {entry.director}</div>
+                <div className={'info'}><b>Release Year:</b> {entry.releaseYear}</div>
+            </div>)
+        }
 
     }
 

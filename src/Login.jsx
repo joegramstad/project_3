@@ -15,6 +15,7 @@ export default function Login(props) {
         Axios.post('api/user/', {username, password})
             .then(response => {
                 navigate('/')
+                window.location.reload()
             })
             .catch(error => console.log(error));
     }
