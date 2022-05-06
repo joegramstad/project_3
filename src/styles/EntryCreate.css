@@ -9,3 +9,10 @@
 #pageTitle {
     text-align: center;
 }
+
+@media(max-width: 900px) {
+    #createBox {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+}
